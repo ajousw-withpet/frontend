@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import axios from 'axios';
 import logo from '../../assets/logo_withpet.png';
-// import profile from '../../assets/user_default_profile.png';
 
 function Nav({ userInfo, setUserInfo }) {
   const [toggle, setToggle] = useState(false);
@@ -113,7 +112,7 @@ function Nav({ userInfo, setUserInfo }) {
       </Link>
       <ul className="menu">
         <li onClick={toggleDropdown} className="user-profile">
-          <img style={{ borderRadius: '50%' }} src={userInfo.userProfile} className="profile" alt="프로필" />
+          <img style={{ borderRadius: '50%', width: '60px', height: '40px' }} src={userInfo.userProfile} className="profile" alt="프로필" />
           <div className={`user-name ${toggle ? 'active' : ''}`}>
             <p>{userInfo.userName}</p>
             {toggle && dropdown}

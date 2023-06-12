@@ -7,18 +7,40 @@ function ApplicantDetail() {
   const { id } = useParams();
   const [info, setInfo] = useState({});
   const navigate = useNavigate();
-  // console.log(id);
 
   useEffect(() => {
     axios.get(`https://withpet.site/api/v1/show-applicant/${id}`, { withCredentials: true })
       .then((res) => {
         setInfo(res.data.result);
-        // console.log(res.data.result);
-        // console.log(applicantList);
       });
   }, []);
 
-  // console.log(info);
+  const handleApprove = () => {
+    const temp = {
+      userId: id,
+    };
+
+    axios.post('https://withpet.site/api/v1/admin/accept-petsitter', temp, { withCredentials: true })
+      .then(() => {
+        // eslint-disable-next-line no-alert
+        alert('승인되었습니다.');
+        navigate(-1);
+      })
+      .catch(() => {});
+  };
+  const handleCancle = (row) => {
+    const temp = {
+      userId: row.applicant_user_id,
+    };
+    axios.post('https://withpet.site/api/v1/admin/refuse-applicant', temp, { withCredentials: true })
+      .then(() => {
+        // eslint-disable-next-line no-alert
+        alert('거절되었습니다.');
+        navigate(-1);
+      })
+      .catch(() => {});
+  };
+
   return (
     <div>
       <div style={{
@@ -63,9 +85,32 @@ function ApplicantDetail() {
         </div>
         <div>
           <p style={{ fontSize: '24px', margin: '30px 0px 16px 0px', fontWeight: 'bold' }}>펫시터 경력</p>
+          <p style={{ fontSize: '14px', color: '#999999' }}>{info.applicant_petsitter_career}</p>
+        </div>
+        <div>
+          <p style={{ fontSize: '24px', margin: '30px 0px 16px 0px', fontWeight: 'bold' }}>그 외 반려동물 관련 경력 또는 경험</p>
           <p style={{ fontSize: '14px', color: '#999999' }}>{info.applicant_animal_career}</p>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{
+          display: 'flex', justifyContent: 'center', flexDirection: 'column', marginTop: '30px',
+        }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <button
+              style={{
+                width: '100px', height: '40px', backgroundColor: '#CAA969', color: 'white', border: '1px solid white',
+              }}
+              onClick={handleApprove}
+            >승낙
+            </button>
+            <button
+              style={{
+                width: '100px', height: '40px', backgroundColor: 'white', color: '#CAA969', border: '1px solid #CAA969',
+              }}
+              onClick={handleCancle}
+            >거절
+            </button>
+          </div>
           <Button type="button" onClick={() => navigate(-1)}>
             <p style={{ fontSize: '20px' }}>돌아가기</p>
           </Button>

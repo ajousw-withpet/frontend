@@ -25,38 +25,18 @@ import UserEvaluation from './pages/UserEvaluation/UserEvaluation';
 import PetsitterDiaries from './pages/PetsitterDiaries/PetsitterDiaries';
 import PetsitterInfoModify from './pages/PetsitterInfoManage/PetsitterInfoModify';
 import Chat from './pages/Chat/Chat';
-import Notification from './pages/Notification/Notification';
+// import Notification from './pages/Notification/Notification';
 import NotificationPage from './pages/Notification/NotificationPage';
 import ApplicantDetail from './pages/AdminMainPage/ApplicantDetail';
 
 function App() {
   const [state, setState] = useState('false');
-  // const navigate = useNavigate();
-  // const [userInfo, setUserInfo] = useState({
-  //   role: '',
-  //   userName: '',
-  //   userProfile: '',
-  // });
+
   const [userInfo, setUserInfo] = useState(
     localStorage.getItem('userInfo')
       ? JSON.parse(localStorage.getItem('userInfo'))
       : '',
   );
-  // console.log(userInfo);
-  // const setUserInfo = () => {
-  //   localStorage.setItem('userInfo', '');
-  // };
-
-  // const needLogIn = () => {
-  //   // eslint-disable-next-line no-alert
-  //   alert('로그인이 필요한 서비스입니다.');
-  //   navigate('/');
-  //   setUserInfo({
-  //     role: '',
-  //     userName: '',
-  //     userProfile: '',
-  //   });
-  // }
 
   return (
     <>
@@ -118,7 +98,7 @@ function App() {
           <Route path="/notification" element={<NotificationPage />} />
         </Route>
       </Routes>
-      <Notification />
+      {/* <Notification /> */}
     </>
   );
 }

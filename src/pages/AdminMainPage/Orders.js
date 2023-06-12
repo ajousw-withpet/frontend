@@ -7,11 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
-export default function Orders({ rows, handleApprove, handleCancle }) {
+export default function Orders({ rows }) {
   const navigate = useNavigate();
 
   const onClick = (id) => {
-    // 지원자 아이디와 함께 지원자 상세정보보기로 이동
     navigate(`./detail/${id}`);
   };
 
@@ -27,7 +26,6 @@ export default function Orders({ rows, handleApprove, handleCancle }) {
             <TableCell>계정</TableCell>
             <TableCell>전화번호</TableCell>
             <TableCell>상태</TableCell>
-            <TableCell align="right">승낙 여부</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -39,10 +37,6 @@ export default function Orders({ rows, handleApprove, handleCancle }) {
               <TableCell>{row.applicant_user_auth_id}</TableCell>
               <TableCell>{row.applicant_user_phone}</TableCell>
               <TableCell>{row.applicant_status}</TableCell>
-              <TableCell align="right">
-                <button onClick={() => handleApprove(row)}>승낙</button>
-                <button onClick={() => handleCancle(row)}>거절</button>
-              </TableCell>
             </TableRow>
           ))}
         </TableBody>
